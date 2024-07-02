@@ -1,10 +1,12 @@
 # SEA-Salon, 2024/07/02
 
-This is my submission for COMPFEST 16 Software Engineering Academy. Thank you for reading and I hove this readme files can help you try my submission. Feel free to contact me if there is something you wanted to ask for. 
+This is my submission for COMPFEST 16 Software Engineering Academy. My biggest Thank you for reading this and I hope this simple readme files can help you try my submission. Feel free to contact through email me if there is something you wanted to ask for. 
+
+- email = fairuz.akbar.azaria@mail.ugm.ac.id
 
 ## Technologies
 
-The main technology behind this project is **Python**. I'm using Python **Flask** to built my project. For the database, I'm using **CockroachDB**. I then deploy this project using **Docker** on my personal **Alibaba Linux server**.
+The main technology behind this project is **Python**. I'm using Python **Flask** to built my project. For the database, I'm using **CockroachDB's** PostgreSQL. I then deploy this project using **Docker** on my personal **Alibaba Linux server**.
 
 ## System Architectures
 
@@ -18,6 +20,8 @@ This is my main module and it function as the one that manage all child modules 
 This is where any requests are being process, For more detailed endpoints data and its example, I have simplified it in my Postman API Collection in this Repository.
 
 ***Notes**: All request parameters are in raw JSON format*
+
+***Notes**: Some request required Admin privileges*
 
 ## Installation and Usage
 
@@ -47,17 +51,17 @@ Below are some user data you can use for authentication purposes:
 }
 ```
 
-### Docker Installation on Local Machine
+### Application Installation on Local Machine using Docker
 
-if you want to install my application in your local machine, I advise using docker since I have package all required version and data to make it easy to deploy. If you are interested, you can view this project's docker images in [my docker hub repository](https://hub.docker.com/repository/docker/fairuzazaria/sea-salon/general). Below are some of the steps you can follow to do install my application on your local machines using docker:
+If you want to install my application in your local machine, I highly advise using docker since I have packaged all the required version and environments to make it easy to deploy. If you are interested, you can also view this project's docker images in [my docker hub repository](https://hub.docker.com/repository/docker/fairuzazaria/sea-salon/general). Below are some of the steps you can follow to do install my application on your local machines using docker:
 
 1. Pull docker image
 ```bash
-docker pull fairuzazaria/sea-salon:v1.0
+docker pull fairuzazaria/sea-salon:v1.1
 ```
 2. Run docker image on port 5000
 ```bash
-docker run -d -p 5000:5000 -e PYTHONUNBUFFERED=1 fairuzazaria/sea-salon:v1.0
+docker run -d -p 5000:5000 -e PYTHONUNBUFFERED=1 fairuzazaria/sea-salon:v1.1
 ```
 5. Make sure container is running
 ```bash

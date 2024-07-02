@@ -67,9 +67,7 @@ def login():
 @jwt_required()
 def logout():
     try:
-        data = request.get_json()
-        response = controller.remove_authentication(data['user_name'], data['access_token'], data['refresh_token'])
-
+        response = controller.remove_authentication()
         return jsonify(
             {
                 'response': response,

@@ -35,12 +35,12 @@ def authenticate(email, password):
 
     return response
 
-def remove_authentication(user_id, user_name, user_role, access_token, refresh_token):
-    session.pop(user_id, None)
-    session.pop(user_name, None)
-    session.pop(user_role, None)
-    session.pop(access_token, None)
-    session.pop(refresh_token, None)
+def remove_authentication():
+    session.pop('user_id', None)
+    session.pop('user_name', None)
+    session.pop('user_role', None)
+    session.pop('access_token', None)
+    session.pop('refresh_token', None)
 
     return 'Successfully Logging Out!'
     
@@ -120,7 +120,7 @@ def get_reservation(user_id=None):
         cur.execute(query)
         data = cur.fetchall()
     
-    response = [{'user_name':response[0], 'user_phone':response[1], 'service':response[1], 'branch':response[1], 'date':str(response[1]), 'status':response[1]} for response in data]
+    response = [{'user_name':response[0], 'user_phone':response[1], 'service':response[2], 'branch':response[3], 'date':str(response[4]), 'status':response[5]} for response in data]
     return response
 
 def add_reservation(user_id, phone, service_id, date):

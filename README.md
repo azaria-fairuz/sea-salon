@@ -55,19 +55,23 @@ Below are some user data you can use for authentication purposes:
 
 If you want to install my application in your local machine, I highly advise using docker since I have packaged all the required version and environments to make it easy to deploy. If you are interested, you can also view this project's docker images in [my docker hub repository](https://hub.docker.com/repository/docker/fairuzazaria/sea-salon/general). Below are some of the steps you can follow to do install my application on your local machines using docker:
 
-1. Pull docker image
+1. Login to Docker Hub (*a password prompt will appear*)
+```bash
+docker login -u {docker_hub_username}
+```
+2. Pull docker image
 ```bash
 docker pull fairuzazaria/sea-salon:v1.1
 ```
-2. Run docker image on port 5000
+3. Run docker image on port 5000
 ```bash
 docker run -d -p 5000:5000 -e PYTHONUNBUFFERED=1 fairuzazaria/sea-salon:v1.1
 ```
-5. Make sure container is running
+4. Make sure container is running
 ```bash
 docker ps
 ```
-6. You are ready to access the API endpoints 
+5. You are ready to access the API endpoints 
 ```bash
 8.215.10.89:5000/api
 ```

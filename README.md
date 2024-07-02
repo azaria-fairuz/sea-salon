@@ -86,7 +86,7 @@ docker ps
 ```
 5. You are ready to access the API endpoints 
 ```bash
-8.215.10.89:5000/api
+127.0.0.1:5000/api
 ```
 
 ***Notes**: make sure to have docker installed before installation*

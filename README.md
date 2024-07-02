@@ -17,7 +17,20 @@ This is my main module and it function as the one that manage all child modules 
 
 ### b. API Module
 
-This is where any requests are being process, For more detailed endpoints data and its example, I have simplified it in my Postman API Collection in this Repository.
+This is where any requests are being process, For more detailed endpoints data and its example, I have simplified it in my Postman API Collection in this Repository. 
+
+Below are all available API endpoints that can be used:
+```bash
+'/api/' (GET)
+'/api/register' (OPOST)
+'/api/login' (POST)
+'/api/logout' (POST)
+'/api/refresh' (POST)
+'/api/reviews' (GET, POST)
+'/api/branch' (GET, POST)
+'/api/services' (GET, POST)
+'/api/reservation' (GET, POST)
+```
 
 ***Notes**: All request parameters are in raw JSON format*
 

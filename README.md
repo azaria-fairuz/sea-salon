@@ -11,7 +11,7 @@ The main technology behind this project is **Python**. I'm using Python **Flask*
 This project is made by using **MVC architectures**. It display data through **Views**, process data through **controllers**, and stores data in a database **models**. I have also allowed the architectures to be **modularized**, therefore each modules can be easily taken out or added. This creates an environment where each modules becomes almost independent from one another. I achieved this by using **Flask Blueprints** and separated my applications into 2 main modules, the **Main App module**, and the **API module**.
 
 ### a. Main App Module
-This is my main module and it function as the one that manage all child modules within the application. It also contains the main views that are supposed to be seen by the clients. Unfortunately due to current university exams, I am unable to finish the views part. But I have design its user interface. If you are interested, you can view it here on my [Figma file](https://www.figma.com/design/dJiI7fn8yLXTjFIz1tShDj/Salon?node-id=28-3745).
+This is my main module and it function as the one that manage all child modules within the application. It also contains the main views that are supposed to be seen by the clients. Unfortunately due to current university exams, I am unable to finish the views part. But I have designed its user interface. If you are interested, you can view it here on my [Figma file](https://www.figma.com/design/dJiI7fn8yLXTjFIz1tShDj/Salon?node-id=28-3745).
 
 ### b. API Module
 

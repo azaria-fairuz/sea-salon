@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "b1ab3ac4-8e60-4bdb-9949-bb89f6e16cca",
+		"name": "SEA-Salon",
+		"description": "For Github repository of this project, please visit [github/sea-salon.](https://github.com/azaria-fairuz/sea-salon)\n\nFor Basic endpoints access, please adjust the current variables as follows:\n\na. base_url = 8.215.10.89\n\nb. base_port = 5000\n\nc. api_prefix = api\n\nd. access_token = {retrived from login}\n\ne. refresh_token = {retrived from login}\n\nFor more details regarding this project, please visit this [ readme link.](https://github.com/azaria-fairuz/sea-salon/blob/main/README.md)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26431154"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_email\": \"thomas.n@compfest.id\",\r\n    \"user_password\": \"Admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Majid Martin\",\r\n    \"user_email\": \"majid.martin@mail.id\",\r\n    \"user_ephone\": \"08188836222\",\r\n    \"user_password\": \"Cstmr123\",\r\n    \"user_role\": \"Customer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"admn0000\",\r\n    \"user_name\": \"Thomas N\",\r\n    \"user_role\": \"Admin\",\r\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxOTkyOTg1NiwianRpIjoiMjcwMThkZDktNWI5ZS00Y2RiLThmNGMtZDljMTNlYjY0ZTRlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRob21hcy5uQGNvbXBmZXN0LmlkIiwibmJmIjoxNzE5OTI5ODU2LCJjc3JmIjoiMmM3MTZmY2MtMWE0NC00MmU1LWIyZWMtMDI2OTBkNDc1ZWIyIiwiZXhwIjoxNzE5OTMzNDU2fQ.aOIEhqmxDqIjnmNG4t5M1DSMYvHLsx4d9a0BMmO6RJw\",\r\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxOTkyOTg1NiwianRpIjoiN2RmMzM4OTctMzdhYi00YTc1LTlmN2MtOTczNWE5MjJjOTBiIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJ0aG9tYXMubkBjb21wZmVzdC5pZCIsIm5iZiI6MTcxOTkyOTg1NiwiY3NyZiI6ImRkMzlhMDA5LTdmNDctNDk4OS05Njc5LTZhYWRhYTRlMWFiMiIsImV4cCI6MTcxOTkzMzQ1Nn0.7aZTWgLBYx8qWUf2RuF1XKg9Nqv6t97Fu__ggX0HxzU\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_refresh}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Get Reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/reviews",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"cstr0000\",\r\n    \"service_id\": \"srby00010001\",\r\n    \"branch_id\": \"srby0001\",\r\n    \"user_rating\": 5,\r\n    \"user_notes\": \"Visited SEA Salon for a special occasion hairstyle. They nailed it—thank you!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/reviews",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "Get Services",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"branch_id\": \"jkrt0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/services",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service\": \"Hair Coloring\",\r\n    \"branch_id\": \"syst0002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/services",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"services"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Branches",
+			"item": [
+				{
+					"name": "Get Branch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/branch",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Branch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"SEA SALON: LOMBOK\",\r\n    \"address\": \"505 Dreamscape Street, Fantasy Borough, Vision County, QR9012\",\r\n    \"open\": \"07:00:00\",\r\n    \"close\": \"23:00:00\",\r\n    \"time_zone\": \"WITA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/branch",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"branch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservations",
+			"item": [
+				{
+					"name": "Get Reservation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"cstr0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/reservation",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Reservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"cstr0000\",\r\n    \"phone\": \"81234567890\",\r\n    \"service_id\": \"srby00010002\",\r\n    \"date\": \"2024-07-20 12:00:00.000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/reservation",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"{{api_prefix}}",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}:{{base_port}}/{{api_prefix}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"port": "{{base_port}}",
+					"path": [
+						"{{api_prefix}}",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "8.215.10.89",
+			"type": "string"
+		},
+		{
+			"key": "base_port",
+			"value": "5000",
+			"type": "string"
+		},
+		{
+			"key": "api_prefix",
+			"value": "api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token_refresh",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

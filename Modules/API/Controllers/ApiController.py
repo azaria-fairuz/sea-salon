@@ -1,9 +1,10 @@
 import os, sys
 
 sys.path.append(os.getcwd())
-from App.Helpers.helper import connect, make_requests
+from App.Helpers.helper import connect, make_requests, has_empty_value
 from flask import session
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+from configparser import ConfigParser
 
 base_url_api = '127.0.0.1:5000/api'
 
@@ -20,8 +21,9 @@ def authenticate(email, password):
             access_token = create_access_token(identity=data[0][3])
             refresh_token = create_refresh_token(identity=data[0][3])
 
-            session['user_name'] = data[0][1]
             session['user_id'] = data[0][0]
+            session['user_name'] = data[0][1]
+            session['user_role'] = data[0][2]
             session['access_token'] = access_token
             session['refresh_token'] = refresh_token
 
@@ -33,8 +35,10 @@ def authenticate(email, password):
 
     return response
 
-def remove_authentication(username, access_token, refresh_token):
-    session.pop(username, None)
+def remove_authentication(user_id, user_name, user_role, access_token, refresh_token):
+    session.pop(user_id, None)
+    session.pop(user_name, None)
+    session.pop(user_role, None)
     session.pop(access_token, None)
     session.pop(refresh_token, None)
 
@@ -139,6 +143,103 @@ def add_reservation(user_id, phone, service_id, date):
             connection.commit()
 
         response = 'Successfully Created a Reservation!'
+        return response
+    except Exception as e:
+        connection.rollback()
+        response = str(e)
+        return response
+    
+def add_services(service, branch_id):
+    try:
+        # check user's role
+        user_role = session.get('user_role', 'Guest')
+        if user_role != 'Admin':
+            response = 'Cannot add services due to the lack of current authorization!'
+            return response
+        
+        connection = connect()
+        query_id = f'select id from "salon"."services" where branch_id = \'{branch_id}\' order by id desc limit 1;'
+        with connection.cursor() as cur:
+            cur.execute(query_id)
+            id = cur.fetchall()
+
+            # construct id
+            if len(id) != 0:
+                split_id = list(id[0][0])
+                id_branch, id_branch_number, id_service = ''.join(split_id[:4]), ''.join(split_id[4:8]), ''.join(split_id[8:])
+                id = f'{id_branch}{id_branch_number}{int(id_service) + 1:0{len(id_service)}d}'
+            else:
+                id = f'{branch_id}0001'
+
+            query_service = """insert into "salon"."services"(id, service, branch_id) values (%s, %s, %s);"""
+            cur.execute(query_service, (id, service, branch_id))
+
+            connection.commit()
+
+        response = 'Successfully Added New Services!'
+        return response
+    except Exception as e:
+        connection.rollback()
+        response = str(e)
+        return response
+
+def add_branch(name, address, open, close, time_zone):
+    try:
+        # check user's role
+        user_role = session.get('user_role', 'Guest')
+        if user_role != 'Admin':
+            response = 'Cannot add branch due to the lack of current authorization!'
+            return response
+        
+        connection = connect()
+        query_id = f'select id from "salon"."branches" order by id desc limit 1;'
+        with connection.cursor() as cur:
+            cur.execute(query_id)
+            id = cur.fetchall()
+
+            # construct id
+            split_id = list(id[0][0])
+            id_str, id_int  = ''.join(split_id[:4]), ''.join(split_id[4:])
+            id = f'syst{int(id_int) + 1:0{len(id_int)}d}'
+
+            query_branch = """insert into "salon".branches(id, name, address, open, close, time_zone) values (%s, %s, %s, %s, %s, %s);"""
+            cur.execute(query_branch, (id, name, address, open, close, time_zone))
+
+            connection.commit()
+
+        response = 'Successfully Added New Branch!'
+        return response
+    except Exception as e:
+        connection.rollback()
+        response = str(e)
+        return response
+
+def add_users(name, email, phone, password, role):
+    try:
+        # validate required data
+        if (has_empty_value([name, email, password, role])):
+            response = 'All required data must be filled!'
+            return response
+        
+        connection = connect()
+        
+        # assuming that thare are only 2 roles
+        query_id = f'select id from "user"."data" order by id desc limit 1;'
+        with connection.cursor() as cur:
+            cur.execute(query_id)
+            id = cur.fetchall()
+
+            # construct id
+            split_id = list(id[0][0])
+            id_str, id_int  = 'cstr', ''.join(split_id[4:])
+            id = f'{id_str}{int(id_int) + 1:0{len(id_int)}d}'
+
+            query_user = f'insert into "user"."data"(id, name, email, phone, password, role) values (\'{id}\', \'{name}\', \'{email}\', \'{phone}\', crypt(\'{password}\', gen_salt(\'md5\')), \'{role}\');'
+            cur.execute(query_user)
+
+            connection.commit()
+
+        response = 'Successfully Added New User!'
         return response
     except Exception as e:
         connection.rollback()

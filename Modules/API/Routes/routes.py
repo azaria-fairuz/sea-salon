@@ -23,7 +23,8 @@ def index():
 @api.route("/register", methods=["POST"])
 def register():
     try:
-        response = 'Coming Soon!'
+        data = request.get_json()
+        response = controller.add_users(data['user_name'], data['user_email'], data['user_ephone'], data['user_password'], data['user_role'])
         return jsonify(
             {
                 'response': response,
@@ -137,7 +138,8 @@ def reviews():
 def branch():
     try:
         if request.method == 'POST':
-            response = 'Coming Soon!'
+            data = request.get_json()
+            response = controller.add_branch(data['name'], data['address'], data['open'], data['close'], data['time_zone'])
         else:
             response = controller.get_braches()
 
@@ -162,7 +164,8 @@ def branch():
 def services():
     try:
         if request.method == 'POST':
-            response = 'Coming Soon!'
+            data = request.get_json()
+            response = controller.add_services(data['service'], data['branch_id'])
         else:
             data = request.get_json()
             response = controller.get_services(data['branch_id'])

@@ -1,5 +1,5 @@
 # base images
-FROM python:3.10.12-slim
+FROM python:3.11-slim
 
 # Install PostgreSQL development libraries
 RUN apt-get update && \

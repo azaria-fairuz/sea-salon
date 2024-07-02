@@ -4,10 +4,4 @@ sites = Blueprint('sites', __name__)
 
 @sites.route('/')
 def index():
-    return jsonify(
-        {
-            'response': 'SEA SALON is ready to be accessed',
-            'status': '200 OK',
-            'messages': 'success'
-        }
-    )
+    return render_template('customers/index.html')
